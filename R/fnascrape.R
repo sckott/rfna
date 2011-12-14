@@ -12,11 +12,11 @@ cgenvec2 <- str_trim(cgenvec, 'both')
 
 jephomeout <- getURL(jephomeurl)
 # gsub("Acamptopappus", "\\1", jephomeout)
-str_extract(jephomeout, "\\b Acamptopappus")
+# str_extract(jephomeout, "\\b Acamptopappus")
 
 str_extract_all(jephomeout, "/(cgi-bin)/(get_IJM.pl\\?tid=)[0-9]{3}") # get's all URLs
 
-str_extract(test, paste("/(cgi-bin)/(get_IJM.pl\\?tid=)[0-9]{3}",  cgenvec2[[1]], sep=''))
+# str_extract(test, paste("/(cgi-bin)/(get_IJM.pl\\?tid=)[0-9]{3}",  cgenvec2[[1]], sep=''))
 
 
 
@@ -50,14 +50,32 @@ names(df_allpgs) <- c('TaxonID','Name')
   
 
 #####  For each individual page
-# get the whole file (using some basic HTML parsing)
-url <- 'http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=100070'
-out <- readHTMLTable(url)
-line_number <- grep("Receptacles", out[[1]][[1]])
-text <- out[[1]][[1]][line_number]
-## Assumes Ray florets is the thing that follows after Receptacles
-tt <- gsub(".* Receptacles (.*)\\. Ray florets .*", "\\1", text)
-str_extract(tt, "[e]?(paleate)")
+#' Search individual page of FNA, by specifying the URL
+#' Get the date when article was last updated by inputting the doi for the article.
+#' @import RCurl stringr
+#' @param page URL to search on
+#' @param search regular expression search string (quoted)
+#' @param url the PLoS API url for the function (should be left to default)
+#' @param ... optional additional curl options (debugging tools mostly)
+#' @param curl If using in a loop, call getCurlHandle() first and pass 
+#'  the returned value in here (avoids unnecessary footprint)
+#' @return Date when article data was last updated.
+#' @export
+#' @examples \dontrun{
+#' url <- 'http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=100070'
+#' searchonepg(url, )
+#' }
+searchonepg <- 
+function (page, search
+          ) {
+#   url <- 'http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=100070'
+  out <- readHTMLTable(page)
+  line_number <- grep("Receptacles", out[[1]][[1]])
+  text <- out[[1]][[1]][line_number]
+  ## Assumes Ray florets is the thing that follows after Receptacles
+  tt <- gsub(".* Receptacles (.*)\\. Ray florets .*", "\\1", text)
+  str_extract(tt, "[e]?(paleate)")
+}
 
 
 #####  All pages of Floral of North America Asteraceae genera
