@@ -1,0 +1,16 @@
+Package: rfna
+Version: 0.0-1
+Date: 2011-12-28
+Description: Functions to do web scraping on
+    the Flora of North America website.
+Title: Web scraper for the Flora of North America.
+License: BSD
+Author: Scott Chamberlain
+Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>
+URL: https://github.com/ropensci/rfna
+Import: XML,
+    doMC,
+    plyr
+Collate:
+    'getdaughterURLs.R'
+    'gettaxanames.R'
