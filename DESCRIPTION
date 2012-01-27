@@ -8,9 +8,14 @@ License: BSD
 Author: Scott Chamberlain
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>
 URL: https://github.com/ropensci/rfna
-Import: XML,
-    doMC,
-    plyr
+Depends:
+    XML,
+    plyr,
+    stringr,
+    RCurl
+Suggest: doMC
 Collate:
     'getdaughterURLs.R'
     'gettaxanames.R'
+    'fnasearch.R'
+    'receptacle.R'

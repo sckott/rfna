@@ -1,0 +1,25 @@
+\name{fnasearch}
+\alias{fnasearch}
+\title{Search web pages for terms.}
+\usage{
+  fnasearch(url, terms = list())
+}
+\arguments{
+  \item{url}{The URL of the page.}
+
+  \item{terms}{Terms to search for (if >1, supply in a
+  list).}
+}
+\value{
+  Search results.
+}
+\description{
+  Search web pages for terms.
+}
+\examples{
+\dontrun{
+url <- 'http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=102552'
+fnasearch(url, terms='Receptacle')
+}
+}
+

@@ -1,5 +1,5 @@
 #' Get URLs to daughter pages from a single web page, or multiple pages, on FNA.
-#' @import XML doMC plyr
+#' @import XML doMC plyr RCurl stringr
 #' @param url The URL of the page.
 #' @param cores Use parallel processing in plyr functions (default to FALSE).
 #' @param no_cores Number of cores to use in the parallel plyr work.
@@ -28,7 +28,7 @@ function(url = list(), cores = FALSE, no_cores = NA, baseurl = 'http://www.eflor
   if(cores == TRUE){  
     require(doMC)
     registerDoMC(no_cores)
-    laply(url, doitt, .progress = 'text', .parallel = TRUE)  
+    laply(url, doitt, .progress = 'text', .parallel = TRUE)[[1]][[1]]  
   } else
-    { laply(url, doitt, .progress = 'text', .parallel = FALSE) }
+    { laply(url, doitt, .progress = 'text', .parallel = FALSE)[[1]][[1]] }
 }
