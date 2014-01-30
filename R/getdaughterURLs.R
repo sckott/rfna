@@ -15,20 +15,19 @@
 #' getdaughterURLs(list(pg1, pg2, pg3))
 #' getdaughterURLs(list(pg1, pg2, pg3), cores=TRUE, no_cores=2)
 #' }
-getdaughterURLs <-
-
-function(url = list(), cores = FALSE, no_cores = NA, baseurl = 'http://www.efloras.org/')
+getdaughterURLs <- function(url)
 {
   doitt <- function(x) {
-    page <- getURL(x)
-    t_ <- str_extract_all(page, "(florataxon\\.aspx\\?flora_id=1&taxon_id=)[0-9]{6}")
-    t__ <- llply(t_, function(y) paste(baseurl, y, sep=''))
-    t__
-  }  
-  if(cores == TRUE){  
-    require(doMC)
-    registerDoMC(no_cores)
-    laply(url, doitt, .progress = 'text', .parallel = TRUE)[[1]][[1]]  
-  } else
-    { laply(url, doitt, .progress = 'text', .parallel = FALSE)[[1]][[1]] }
+    page <- htmlParse(x)
+    dat <- lapply(xpathApply(page, '//a[contains(@href,"florataxon.aspx?flora_id=1&")]'), 
+                  function(x){ 
+                    list(sprintf("http://www.efloras.org/%s", xmlGetAttr(x, "href")), 
+                         strsplit(xmlValue(x), ",")[[1]][[1]])
+                    })
+    df <- data.frame(do.call(rbind, dat), stringsAsFactors=FALSE)
+    names(df) <- c("url","family")
+    df
+  }
+  doitt(x)
+#   laply(url, doitt, .progress = 'text', .parallel = FALSE)[[1]][[1]]
 }

@@ -1,11 +1,11 @@
 # `rfna`
 
-Install `rfna` using install_github within Hadley's devtools package.
+Install `rfna` using `install_github` from devtools.
 
 ```R
 install.packages("devtools")
 require(devtools)
-install_github("rfna", "rOpenSci")
+install_github("ropensci/rfna")
 require(rfna)
 ```
 

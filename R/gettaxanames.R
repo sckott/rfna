@@ -1,35 +1,62 @@
 #' Get taxa names from a single web page, or multiple pages, on FNA.
-#' @import XML doMC plyr
-#' @param url The URL of the page.
-#' @param cores Use parallel processing in plyr functions (default to FALSE).
-#' @param no_cores Number of cores to use in the parallel plyr work. 
-#' @return Taxa names and taxon IDs in a data.frame.
-#' @details If you use parallelization with argument cores=TRUE, make sure to 
-#'    install doMC first.
+#' 
+#' @import XML doMC plyr stringr
+#' @param scource Source flora
+#' @param rank One of 'family', 'genera', or 'species'
+#' @param family A taxonomic family
+#' @param genus A taxonomic genus
+#' @return Taxa names in a vector or data.frame
 #' @export
 #' @examples \dontrun{
-#' pg1<-'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=1'
-#' pg2<-'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=2'
-#' pg3<-'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=3'
-#' gettaxanames(pg1)
-#' gettaxanames(list(pg1, pg2, pg3))
-#' gettaxanames(list(pg1, pg2, pg3), cores=TRUE, no_cores=2)
+#' gettaxanames(source="fna")
+#' 
+#' # using Jepson Manual
+#' gettaxanames(source="jepson")
 #' }
-gettaxanames <-
-
-function(url = list(), cores = FALSE, no_cores = NA)
+gettaxanames <- function(source = NULL, rank="family")
 {
-  doit <- function(x) {
-    html_ <- readHTMLTable(x)
-    df <- html_[[7]][-c(1:2,length(html_[[7]][,1])-1,length(html_[[7]][,1])),1:2]
+  # Flora of North America
+  families <- 'http://www.efloras.org/browse.aspx?flora_id=1'
+  pg1 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=1'
+  pg2 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=2'
+  pg3 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=3'
+  fnafun <- function(x) {
+    doc <- readHTMLTable(x)
+    dd <- doc[[7]]
+    df <- dd[-c(1:2, length(dd[,1])-1, length(dd[,1])),1:2]
     names(df) <- c('TaxonID','Name')
+    as.character(df$Name)
+  }
+  
+  # Flora of Chile
+  pg1 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=1'
+  pg2 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=2'
+  pg3 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=3'
+  fnafun <- function(x) {
+    doc <- readHTMLTable(x)
+    dd <- doc[[7]]
+    df <- dd[-c(1:2, length(dd[,1])-1, length(dd[,1])),1:2]
+    names(df) <- c('TaxonID','Name')
+    as.character(df$Name)
+  }
+  
+  # Jepson Manual
+  jepsonurl <- "http://ucjeps.berkeley.edu/IJM_toc.html"
+  jepsfun <- function(x){
+    doc <- readHTMLTable(x)
+    dd <- doc[[4]]
+    foo <- function(x){ 
+      bb = data.frame(section = x["Section"], family = x["Family"])
+      cc = x["Genera"]
+      ccc <- str_trim(strsplit(as.character(cc), ",")[[1]], "both")
+      cbind(bb, ccc)
+    }
+    df <- do.call(rbind, apply(dd, 1, foo))
+    row.names(df) <- NULL
     df
   }
-  if(cores == TRUE){  
-    require(doMC)
-    registerDoMC(no_cores)
-    dflist <- laply(url, doit, .progress = 'text', .parallel = TRUE)  
-  } else
-    { dflist <- laply(url, doit, .progress = 'text', .parallel = FALSE) }
-  ldply(dflist, identity)
+  
+  switch(source,
+         fna=do.call(c, lapply(list(pg1, pg2, pg3), fnafun)),
+         jepson=jepsfun(jepsonurl))
 }
