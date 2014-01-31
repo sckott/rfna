@@ -8,9 +8,7 @@
 #' url <- 'http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=102552'
 #' fnasearch(url, terms='Receptacle')
 #' }
-fnasearch <-
-  
-function(url, terms = list())
+fnasearch <- function(url, terms = list())
 {
   out <- suppressWarnings(readHTMLTable(url))
   line_number <- grepl(terms, out[[1]][[1]])

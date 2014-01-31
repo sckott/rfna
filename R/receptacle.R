@@ -1,5 +1,5 @@
 #' Get state (paleate or epaleate) of receptacle.
-#' @import stringr XML plyr
+#' @import stringr XML plyr RCurl
 #' @param url The URL of the page you want to search.
 #' @return paleate, epaleate, or 'not found'.
 #' @export
@@ -12,9 +12,7 @@
 #' urls <- getdaughterURLs(pg1)
 #' ldply(urls[1:5], receptacle, .progress='text')
 #' }
-receptacle <-
-  
-function(url)
+receptacle <- function(url)
 {
   out <- suppressWarnings(readHTMLTable(url))
   if(identical( grep("Receptacles", out[[1]][[1]]), integer(0)) == TRUE){
