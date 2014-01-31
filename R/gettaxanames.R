@@ -1,25 +1,22 @@
 #' Get taxa names from a single web page, or multiple pages, on FNA.
 #' 
-#' @import XML doMC plyr stringr
-#' @param scource Source flora
-#' @param rank One of 'family', 'genera', or 'species'
-#' @param family A taxonomic family
-#' @param genus A taxonomic genus
+#' @import XML plyr stringr
+#' @param from Source flora, one of 'fna', 'chilie', or 'jepson'
 #' @return Taxa names in a vector or data.frame
 #' @export
 #' @examples \dontrun{
-#' gettaxanames(source="fna")
+#' get_families("fna")
 #' 
 #' # using Jepson Manual
-#' gettaxanames(source="jepson")
+#' get_families("jepson")
 #' }
-gettaxanames <- function(source = NULL, rank="family")
+get_families <- function(from = NULL)
 {
   # Flora of North America
   fna_families <- 'http://www.efloras.org/browse.aspx?flora_id=1'
-  fna_genera1 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=1'
-  fna_genera2 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=2'
-  fna_genera3 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=3'
+#   fna_genera1 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=1'
+#   fna_genera2 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=2'
+#   fna_genera3 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=3'
   fnafun <- function(x) {
     doc <- readHTMLTable(x)
     dd <- doc[[7]]
@@ -30,7 +27,7 @@ gettaxanames <- function(source = NULL, rank="family")
   
   # Flora of Chile
   chile_families <- 'http://efloras.org/browse.aspx?flora_id=60'
-  chile_genera <- 'http://efloras.org/browse.aspx?flora_id=60'
+#   chile_genera <- 'http://efloras.org/browse.aspx?flora_id=60'
   chilefun <- function(x) {
     doc <- readHTMLTable(x)
     dd <- doc[[7]]
@@ -55,8 +52,8 @@ gettaxanames <- function(source = NULL, rank="family")
     df
   }
   
-  switch(source,
-         fna=do.call(c, lapply(list(fna_genera1, fna_genera2, fna_genera3), fnafun)),
-         chile=,
+  switch(from,
+         fna=fnafun(fna_families),
+         chile=chilefun(chile_families),
          jepson=jepsfun(jepsonurl))
 }
