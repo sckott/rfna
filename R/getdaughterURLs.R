@@ -20,14 +20,15 @@ getdaughterURLs <- function(url)
   doitt <- function(x) {
     page <- htmlParse(x)
     dat <- lapply(xpathApply(page, '//a[contains(@href,"florataxon.aspx?flora_id=1&")]'), 
-                  function(x){ 
-                    list(sprintf("http://www.efloras.org/%s", xmlGetAttr(x, "href")), 
-                         strsplit(xmlValue(x), ",")[[1]][[1]])
+                  function(y){ 
+                    tt <- strsplit(xmlGetAttr(y, "href"), "=")[[1]]
+                    list(strsplit(xmlValue(y), ",")[[1]][[1]], 
+                         tt[length(tt)],
+                         sprintf("http://www.efloras.org/%s", xmlGetAttr(y, "href")))
                     })
     df <- data.frame(do.call(rbind, dat), stringsAsFactors=FALSE)
-    names(df) <- c("url","family")
+    names(df) <- c("name","id","url")
     df
   }
-  doitt(x)
-#   laply(url, doitt, .progress = 'text', .parallel = FALSE)[[1]][[1]]
+  doitt(url)
 }

@@ -16,10 +16,10 @@
 gettaxanames <- function(source = NULL, rank="family")
 {
   # Flora of North America
-  families <- 'http://www.efloras.org/browse.aspx?flora_id=1'
-  pg1 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=1'
-  pg2 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=2'
-  pg3 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=3'
+  fna_families <- 'http://www.efloras.org/browse.aspx?flora_id=1'
+  fna_genera1 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=1'
+  fna_genera2 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=2'
+  fna_genera3 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=3'
   fnafun <- function(x) {
     doc <- readHTMLTable(x)
     dd <- doc[[7]]
@@ -29,10 +29,9 @@ gettaxanames <- function(source = NULL, rank="family")
   }
   
   # Flora of Chile
-  pg1 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=1'
-  pg2 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=2'
-  pg3 <- 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=3'
-  fnafun <- function(x) {
+  chile_families <- 'http://efloras.org/browse.aspx?flora_id=60'
+  chile_genera <- 'http://efloras.org/browse.aspx?flora_id=60'
+  chilefun <- function(x) {
     doc <- readHTMLTable(x)
     dd <- doc[[7]]
     df <- dd[-c(1:2, length(dd[,1])-1, length(dd[,1])),1:2]
@@ -57,6 +56,7 @@ gettaxanames <- function(source = NULL, rank="family")
   }
   
   switch(source,
-         fna=do.call(c, lapply(list(pg1, pg2, pg3), fnafun)),
+         fna=do.call(c, lapply(list(fna_genera1, fna_genera2, fna_genera3), fnafun)),
+         chile=,
          jepson=jepsfun(jepsonurl))
 }
