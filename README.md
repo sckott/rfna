@@ -1,14 +1,19 @@
-# `rfna`
+floras
+========
 
-Install `rfna` using `install_github` from devtools.
+Install `floras` using `install_github` from devtools.
 
 ```R
 install.packages("devtools")
 require(devtools)
-install_github("ropensci/rfna")
-require(rfna)
+install_github("ropensci/floras")
+require(floras)
 ```
 
-This set of functions scrapes web content, and allows searches of the content, on the website of Flora of North America.
+This set of functions scrapes web content, and allows searches of the content, on the eFloras website, including Flora of North America, etc.
 
-The website: http://www.efloras.org/flora_page.aspx?flora_id=1
+The website: http://www.efloras.org
+
+## Quick start
+
+...coming soon.
