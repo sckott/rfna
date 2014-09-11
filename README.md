@@ -23,3 +23,12 @@ library('floras')
 ### Usage
 
 ...coming soon.
+
+## Meta
+
+* Please [report any issues or bugs](https://github.com/ropensci/floras/issues).
+* License: MIT
+* This package is part of the [rOpenSci](http://ropensci.org/packages) project.
+* Get citation information for `floras` in R doing `citation(package = 'floras')`
+
+[![ropensci](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
