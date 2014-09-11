@@ -11,4 +11,4 @@ on_failure:
 - "./travis-tool.sh dump_logs"
 notifications:
   slack:
-    secure: R4f1zyyQAVzdetfOwEG+vcS3u5shmX1S4YQZCgD/NQcuUN9V4APsfzVoFuk92fb4UfjgcDjBcK38TIHXoDG8SaF2cMm12i1eZvj6/utmB/gXXa5cItHyTZPaq4ElScUGDGe4yL9fuleqkDPAG2Au57/phjweMXzMQg2ZUGYtSDI=
+    secure: vCPD1SJED1PUNhVn6NfiLS9A4VqzA744ph15R74H4Ruhgwx2hJOiCLduTnTWGz9SCoJXAHnw6ZUlojv1wh4xTqdpNKg5Yf3VYwwBBeWDWAslK96uzvCHuS1X0YoFzjgaazKa+0ObX3QRZf93IAVjdvKcK81zl5AxhI/J26reneo=
