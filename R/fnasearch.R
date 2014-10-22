@@ -14,4 +14,3 @@ fnasearch <- function(url, terms = list())
   line_number <- grepl(terms, out[[1]][[1]])
   out[[1]][[1]][line_number]
 }
-# require(plyr); require(stringr); require(XML); require(RCurl); require(doMC)

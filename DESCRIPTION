@@ -13,5 +13,6 @@ Imports:
     XML,
     plyr,
     stringr,
-    RCurl,
+    RCurl
+Suggests:
     doMC

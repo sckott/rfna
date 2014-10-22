@@ -62,9 +62,7 @@ get_families <- function(from = NULL)
          jepson=jepsfun(jepsonurl))
 }
 
-#' @method print florts
 #' @export
-#' @rdname get_families
 print.florts <- function(x, ...){
   print(x$names)
 }
