@@ -1,5 +1,6 @@
 language: r
-sudo: required
+sudo: false
+cache: packages
 notifications:
   slack:
     secure: vCPD1SJED1PUNhVn6NfiLS9A4VqzA744ph15R74H4Ruhgwx2hJOiCLduTnTWGz9SCoJXAHnw6ZUlojv1wh4xTqdpNKg5Yf3VYwwBBeWDWAslK96uzvCHuS1X0YoFzjgaazKa+0ObX3QRZf93IAVjdvKcK81zl5AxhI/J26reneo=
