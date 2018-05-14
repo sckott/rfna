@@ -9,3 +9,4 @@ inst/stuff/
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^codemeta\.json$
+^README\.Rmd$

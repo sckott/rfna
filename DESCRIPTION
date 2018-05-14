@@ -1,8 +1,8 @@
 Package: rfna
 Version: 0.1.0.9210
+Title: Web scraper for the Flora of North America
 Description: Functions to do web scraping on
-    the Flora of North America website.
-Title: Web scraper for the Flora of North America.
+    the Flora of North America website ().
 License: MIT + file LICENSE
 Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "sckott@protonmail.com")
