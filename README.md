@@ -1,7 +1,8 @@
 rfna
 ====
 
-[![Build Status](https://travis-ci.org/ropensci/floras.svg?branch=master)](https://travis-ci.org/ropensci/floras)
+[![Build Status](https://travis-ci.org/ropensci/floras.svg?branch=master)](https://travis-ci.org/ropensci/floras) [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
+
 
 This set of functions scrapes web content, and allows searches of the content, on the eFloras website, including Flora of North America, etc.
 
