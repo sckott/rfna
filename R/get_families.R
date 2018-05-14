@@ -1,10 +1,10 @@
 #' Get taxa names from a single web page, or multiple pages, on FNA.
-#' 
+#'
+#' @export
 #' @import XML plyr stringr
-#' @param from Source flora, one of 'fna', 'chile', 'china', 'china_moss', 'nepal', 
+#' @param from Source flora, one of 'fna', 'chile', 'china', 'china_moss', 'nepal',
 #' 'missouri', 'ecuador', or 'jepson'
 #' @return Taxa names in a vector or data.frame
-#' @export
 #' @examples \dontrun{
 #' get_families("fna")
 #' get_families("chile")
@@ -27,13 +27,13 @@ get_families <- function(from = NULL)
   nepal_families_2 <- 'http://www.efloras.org/browse.aspx?flora_id=110&page=2'
   missouri_families <- 'http://www.efloras.org/browse.aspx?flora_id=11'
   ecuador_families <- 'http://www.efloras.org/browse.aspx?flora_id=201'
-  
+
   # Jepson Manual
   jepsonurl <- "http://ucjeps.berkeley.edu/IJM_toc.html"
   jepsfun <- function(x){
     doc <- readHTMLTable(x)
     dd <- doc[[4]]
-    foo <- function(x){ 
+    foo <- function(x){
       bb = data.frame(section = x["Section"], family = x["Family"])
       cc = x["Genera"]
       ccc <- str_trim(strsplit(as.character(cc), ",")[[1]], "both")
@@ -50,7 +50,7 @@ get_families <- function(from = NULL)
     class(res) <- 'florts'
     res
   }
-  
+
   switch(from,
          fna=foo(fna_families),
          chile=foo(chile_families),

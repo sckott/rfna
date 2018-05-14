@@ -1,4 +1,6 @@
 #' Get URLs to daughter pages from a single web page, or multiple pages, on FNA.
+#'
+#' @export
 #' @import XML plyr RCurl stringr
 #' @param url The URL of the page
 #' @param from one of fna or jepson
@@ -7,7 +9,6 @@
 #' @return Taxa names and taxon IDs in a data.frame.
 #' @details If you use parallelization with argument cores=TRUE, make sure to
 #'    install doMC first.
-#' @export
 #' @examples \dontrun{
 #' pg1<-'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=1'
 #' pg2<-'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=10074&page=2'

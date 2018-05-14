@@ -1,14 +1,13 @@
 Package: rfna
-Version: 0.0.9.99
-Date: 2014-09-22
+Version: 0.1.0.9210
 Description: Functions to do web scraping on
     the Flora of North America website.
 Title: Web scraper for the Flora of North America.
 License: MIT + file LICENSE
 Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
-    email = "myrmecocystus@gmail.com")
+    email = "sckott@protonmail.com")
 URL: https://github.com/ropensci/rfna
-BugReports: http://www.github.com/ropensci/rfna/issues
+BugReports: https://github.com/ropensci/rfna/issues
 Imports:
     XML,
     plyr,
@@ -16,3 +15,4 @@ Imports:
     RCurl
 Suggests:
     doMC
+RoxygenNote: 6.0.1
