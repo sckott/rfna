@@ -6,7 +6,7 @@ Description: Functions to do web scraping on
 License: MIT + file LICENSE
 Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
     email = "sckott@protonmail.com")
-URL: https://github.com/ropensci/rfna
+URL: https://docs.ropensci.org/rfna, https://github.com/ropensci/rfna
 BugReports: https://github.com/ropensci/rfna/issues
 Imports:
     XML,
