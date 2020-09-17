@@ -7,7 +7,7 @@
 get_genera(from = NULL, family = NULL, fuzzy = FALSE, ...)
 }
 \arguments{
-\item{from}{Source flora, one of 'fna', 'chile', 'china', 'china_moss', 'nepal', 
+\item{from}{Source flora, one of 'fna', 'chile', 'china', 'china_moss', 'nepal',
 'missouri', 'ecuador', or 'jepson'}
 
 \item{family}{A plant family name.}
