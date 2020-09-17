@@ -8,7 +8,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![Build Status](https://travis-ci.org/sckott/rfna.svg?branch=master)](https://travis-ci.org/sckott/rfna) [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
+[![Build Status](https://travis-ci.org/sckott/rfna.svg?branch=master)](https://travis-ci.org/sckott/rfna) [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 
 
 This set of functions scrapes web content, and allows searches of the content, on the eFloras website, including Flora of North America, etc.
